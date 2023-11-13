@@ -41,14 +41,17 @@ def convert_to_phases(input_path, output_path, brain_areas, t_phases, subject, T
     :return: phases matrix
     :rtype: np.ndarray
     """
+
+
     phases = np.full((brain_areas, t_phases), fill_value=0).astype(np.float64)
     delim = find_delimeter(input_path)
     array = np.genfromtxt(input_path, delimiter=delim)
     for area in tqdm(range(0, brain_areas)):
-        # select by columns, transform to phase
-        time_series = pylab.demean(signal.detrend(array[:, area]))
-        filtered_ts = filter_signal(time_series, TR)
-        phases[area, :] = np.angle(signal.hilbert(filtered_ts))
+        # # select by columns, transform to phase
+        # The data I use is already detrended and demeaned
+        # time_series = demean(signal.detrend(array[:, area]))
+        # filtered_ts = filter_signal(time_series, TR)
+        phases[area, :] = np.angle(signal.hilbert(array[:, area]))
     np.savez_compressed(os.path.join(output_path, 'phases_{}'.format(subject)), phases)
     return phases
 

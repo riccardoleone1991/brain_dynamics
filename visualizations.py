@@ -125,7 +125,7 @@ def plot_hidden_states(hidden_states, n_components, markov_array, output_path):
     df.rename(columns={df.columns[-1]: 'states'},
               inplace=True)
     df['time points'] = [n for n in range(len(hidden_states))]
-    print df.head()
+    print(df.head())
     sns.set_style('white', style_kwds)
     fg = sns.FacetGrid(data=df, hue='states', palette=colors, aspect=1.31,
                        size=12)
@@ -336,7 +336,7 @@ def plot_silhouette_analysis(X, output_path, n_clusters, silhouette_avg,
     # 2nd Plot showing the actual clusters formed
     colors = plt.get_cmap('Spectral')(np.linspace(0, 1, 10))
     ax2.scatter(X[:, 0], X[:, 1], marker='.', s=30, lw=0, alpha=0.7,
-                c=colors, edgecolor='k')
+                edgecolor='k')
     # Draw white circles at cluster centers
     ax2.scatter(centers[:, 0], centers[:, 1], marker='o',
                 c="white", alpha=1, s=200, edgecolor='k')

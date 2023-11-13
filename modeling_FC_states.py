@@ -28,7 +28,7 @@ from keras.models import Sequential, Model
 from keras.optimizers import Adam
 from sklearn import mixture, preprocessing
 from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
-from sklearn.externals import joblib
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import silhouette_score, silhouette_samples
 from sklearn.neighbors import kneighbors_graph

@@ -230,11 +230,11 @@ def separate_concat_array(input_path, starts_json, output_path, n_clusters):
     starts = json.load(open(starts_json))
     output_paths = []
     for n in tqdm(range(len(starts))):
-        new_array = data[starts.items()[n][1][0]:starts.items()[n][1][1], :]
-        output = os.path.join(output_path, starts.keys()[n],
+        new_array = data[list(starts.items())[n][1][0]:list(starts.items())[n][1][1], :]
+        output = os.path.join(output_path, list(starts.keys())[n],
                               'splitted_matrix_clusters.npz')
         output_paths.append(output)
-        create_dir(os.path.join(output_path, starts.keys()[n]))
+        create_dir(os.path.join(output_path, list(starts.keys())[n]))
         np.savez_compressed(output, new_array)
     return output_paths
 
@@ -300,7 +300,8 @@ def find_delimeter(input_path):
 
 
 class SymNDArray(np.ndarray):
-    def __setitem__(self, (i, j), value):
+    def __setitem__(self, key, value):
+        i, j = key
         super(SymNDArray, self).__setitem__((i, j), value)
         super(SymNDArray, self).__setitem__((j, i), value)
 

@@ -98,7 +98,7 @@ def main():
         name = os.path.basename(input_path)
         paths_list = return_paths_list(input_path, output_path, pattern=pattern)
         n_subjects = len(paths_list)
-        array = np.genfromtxt(paths_list[0], delimiter=';')
+        array = np.genfromtxt(paths_list[0], delimiter=',')
         t_phases = array.shape[0]
         dict.update({name: [n_subjects, t_phases]})
         new_output = create_new_output_path(input_path, output_path)
